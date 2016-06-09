@@ -22,7 +22,7 @@
 }(window, function (angular) {
   'use strict';
 
-  angular.module('angucomplete-alt', []).directive('angucompleteAlt', ['$q', '$parse', '$http', '$sce', '$timeout', '$templateCache', '$interpolate', function ($q, $parse, $http, $sce, $timeout, $templateCache, $interpolate) {
+  angular.module('angucomplete-alt', []).directive('angucompleteAlt', ['$q', '$parse', '$http', '$sce', '$timeout', '$templateCache', '$interpolate', 'SearchMeployees', '$location', function ($q, $parse, $http, $sce, $timeout, $templateCache, $interpolate, SearchMeployees, $location) {
     // keyboard events
     var KEY_DW  = 40;
     var KEY_RT  = 39;
@@ -352,6 +352,11 @@
         var rowTop = null;
 
         if (which === KEY_EN && scope.results) {
+          SearchMeployees.newSearching();
+          SearchMeployees.clearFilters();
+          SearchMeployees.addFilter(scope.searchStr);
+          $location.path('search-meployees');
+          //  TODO: IT WORKS ONLY WITH MEPLOY PROJECT, FIX ASAP!!!
           if (scope.currentIndex >= 0 && scope.currentIndex < scope.results.length) {
             event.preventDefault();
             scope.selectResult(scope.results[scope.currentIndex]);
