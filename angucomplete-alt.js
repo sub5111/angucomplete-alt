@@ -813,6 +813,7 @@
         autoMatch: '@',
         focusOut: '&',
         focusIn: '&',
+        searchStr: '=ngModel',
         fieldTabindex: '@',
         inputName: '@',
         focusFirst: '@',
