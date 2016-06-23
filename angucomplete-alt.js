@@ -353,7 +353,6 @@
 
         if (which === KEY_EN && scope.results) {
           SearchMeployees.newSearching();
-          SearchMeployees.clearFilters();
           SearchMeployees.addFilter(scope.searchStr);
           $location.path('search-meployees');
           //  TODO: IT WORKS ONLY WITH MEPLOY PROJECT, FIX ASAP!!!
