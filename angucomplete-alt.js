@@ -354,8 +354,7 @@
         if (which === KEY_EN && scope.results) {
           SearchMeployees.newSearching();
           SearchMeployees.addFilter(scope.searchStr);
-          $location.path(scope.redirectUrl);
-          // $location.path('search-meployees');
+          SearchMeployees.redirect();
           //  TODO: IT WORKS ONLY WITH MEPLOY PROJECT, FIX ASAP!!!
           if (scope.currentIndex >= 0 && scope.currentIndex < scope.results.length) {
             event.preventDefault();
@@ -822,8 +821,7 @@
         fieldTabindex: '@',
         inputName: '@',
         focusFirst: '@',
-        parseInput: '&',
-        redirectUrl: '@'
+        parseInput: '&'
 
       },
       templateUrl: function(element, attrs) {
