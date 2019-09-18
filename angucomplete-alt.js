@@ -22,7 +22,7 @@
 }(window, function (angular) {
   'use strict';
 
-  angular.module('angucomplete-alt', []).directive('angucompleteAlt', ['$q', '$parse', '$http', '$sce', '$timeout', '$templateCache', '$interpolate', 'SearchMeployees', '$location', function ($q, $parse, $http, $sce, $timeout, $templateCache, $interpolate, SearchMeployees, $location) {
+  angular.module('angucomplete-alt', []).directive('angucompleteAlt', ['$q', '$parse', '$http', '$sce', '$timeout', '$templateCache', '$interpolate', '$location', function ($q, $parse, $http, $sce, $timeout, $templateCache, $interpolate, $location) {
     // keyboard events
     var KEY_DW  = 40;
     var KEY_RT  = 39;
@@ -352,10 +352,11 @@
         var rowTop = null;
 
         if (which === KEY_EN && scope.results) {
-          SearchMeployees.newSearching();
-          SearchMeployees.addFilter(scope.searchStr);
-          SearchMeployees.redirect();
-          //  TODO: IT WORKS ONLY WITH MEPLOY PROJECT, FIX ASAP!!!
+          if (scope.onEnterPressed) {
+            scope.onEnterPressed(scope.searchStr);
+          } else {
+            angular.noop();
+          }
           if (scope.currentIndex >= 0 && scope.currentIndex < scope.results.length) {
             event.preventDefault();
             scope.selectResult(scope.results[scope.currentIndex]);
@@ -784,6 +785,7 @@
       require: '^?form',
       scope: {
         selectedObject: '=',
+        onEnterPressed: '=',
         selectedObjectData: '=',
         disableInput: '=',
         initialValue: '=',
